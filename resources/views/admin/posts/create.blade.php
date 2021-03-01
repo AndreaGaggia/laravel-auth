@@ -7,16 +7,18 @@
         @csrf
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
+                value="{{ old('title') }}">
             @error('title')
-                <span class="text-danger">{{ $message }}</span>
+                <span class="invalid-feedback">Il campo title è obbligatorio</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="body">Body</label>
-            <input type="text" class="form-control" name="body" id="body" value="{{ old('body') }}">
+            <input type="text" class="form-control @error('body') is-invalid @enderror" name="body" id="body"
+                value="{{ old('body') }}">
             @error('body')
-                <span class="text-danger">{{ $message }}</span>
+                <span class="invalid-feedback">Il campo body è obbligatorio</span>
             @enderror
         </div>
         <button type="submit" class="btn btn-secondary">Create</button>
