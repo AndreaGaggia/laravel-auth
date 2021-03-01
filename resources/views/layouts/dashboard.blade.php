@@ -63,7 +63,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -82,7 +82,8 @@
             <div class="row">
                 <div class="col-md-2">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dash</a></li>
+                        <li><a href="{{ route('admin.posts.index') }}"><i class="fas fa-tachometer-alt"></i> Dash</a>
+                        </li>
                         <li><a href="#"><i class="fab fa-readme"></i> Posts</a></li>
                         <li><a href="#"><i class="far fa-folder-open"></i> Categories</a></li>
                         <li><a href="#"><i class="fas fa-tags"></i> Tags</a></li>
