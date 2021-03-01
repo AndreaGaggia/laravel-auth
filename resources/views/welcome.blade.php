@@ -90,7 +90,7 @@
 
             <div class="links">
                 <a href="https://laravel.com/docs">docs</a>
-                <a href="https://laravel.com/docs">Vedi tutti i post</a>
+                <a href="{{ route('blog') }}">Vedi tutti i post</a>
             </div>
         </div>
     </div>

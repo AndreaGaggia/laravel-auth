@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('blog', 'PostsController@index')->name('blog');
 
 Auth::routes(['register' => false]);
 //Route::get('/', 'HomeController@index')->name('index');

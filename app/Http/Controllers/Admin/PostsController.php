@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -15,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('updated_at', 'desc')->get();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -37,7 +38,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'title' => 'required|unique:posts',
+            'body' => 'required',
+        ]);
+        $validation['slug'] = Str::slug($validation['title']);
+        Post::create($validation);
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -57,9 +65,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -69,9 +77,17 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $validation = $request->validate([
+            'title' => 'required|unique:posts',
+            'body' => 'required',
+        ]);
+        $validation['slug'] = Str::slug($validation['title']);
+        $post->update($validation);
+        //dd($post);
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -80,7 +96,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         //
     }
